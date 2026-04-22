@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rubik+Glitch&family=VT323&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-digital: "Rubik Glitch", monospace;
+  --font-pixel: "Press Start 2P", monospace;
+  --font-vt: "VT323", monospace;
+}
+
+@layer utilities {
+  .text-shadow-glitch {
+    text-shadow: 3px 0 #00ffff, -3px 0 #ff00ff;
+  }
+  .border-glitch {
+    border-color: #00ffff;
+    box-shadow: 6px 6px 0 0 #ff00ff, 0px 0px 0 2px #000;
+  }
+  .border-glitch-alt {
+    border-color: #ff00ff;
+    box-shadow: 6px 6px 0 0 #00ffff, 0px 0px 0 2px #000;
+  }
+  .bg-static {
+    background-image: repeating-linear-gradient(45deg, #000 0, rgba(255,255,255,0.05) 1px, #000 2px, rgba(255,255,255,0.1) 3px);
+    opacity: 0.2;
+    animation: static-noise 0.05s infinite alternate;
+  }
+  .scanlines {
+    background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.4));
+    background-size: 100% 4px;
+    z-index: 9999;
+    pointer-events: none;
+  }
+  .animate-glitch-jiggle {
+    animation: glitch-jiggle 3s infinite;
+  }
+  .animate-screen-tear {
+    animation: screen-tear 5s steps(2) infinite;
+  }
+}
+
+@keyframes static-noise {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-2px); }
+}
+
+@keyframes glitch-jiggle {
+  0%, 100% { transform: none; text-shadow: 3px 0 #00ffff, -3px 0 #ff00ff; clip-path: inset(0 0 0 0); }
+  2% { transform: translate(3px, -2px) skew(4deg); text-shadow: -3px 0 #00ffff, 3px 0 #ff00ff; clip-path: inset(10% 0 80% 0); }
+  4% { transform: translate(-3px, 3px) skew(-4deg); clip-path: inset(80% 0 10% 0); }
+  6% { transform: none; clip-path: inset(0 0 0 0); }
+  45% { transform: none; clip-path: inset(0 0 0 0); }
+  46% { transform: translate(10px, 0); clip-path: inset(50% 0 30% 0); }
+  48% { transform: translate(-10px, 0); clip-path: inset(30% 0 50% 0); }
+  50% { transform: none; clip-path: inset(0 0 0 0); }
+}
+
+@keyframes screen-tear {
+  0%, 100% { transform: translateX(0); }
+  90% { transform: translateX(0); }
+  92% { transform: translateX(8px); }
+  94% { transform: translateX(-8px); }
+  96% { transform: translateX(4px); }
+  98% { transform: translateX(-4px); }
+}
